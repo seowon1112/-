@@ -41,8 +41,9 @@ export default function Register() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-         取취약 
+      <Button variant="outlined" >
+      <Link href="/"> 取취약  </Link>
+         
       </Button>
       <Dialog open={open} onClose={handleClose}>
          
@@ -118,7 +119,7 @@ export default function Register() {
                 </Box>
               </Container>
             </ThemeProvider>
-    <DialogActions>
+        <DialogActions>
           <Link href="/"> Cancel </Link>
           <Link href="/"> Register</Link>
         </DialogActions>

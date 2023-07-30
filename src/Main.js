@@ -15,6 +15,7 @@ import DialogTitle from '@mui/material/DialogTitle';
   
 
 export default function Main() {
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
