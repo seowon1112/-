@@ -28,7 +28,7 @@ export default function Main() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button  variant="outlined" onClick={handleClickOpen}>
         取취약 
 
       </Button>
