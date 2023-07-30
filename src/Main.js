@@ -27,7 +27,12 @@ export default function Main() {
       <Button variant="outlined" onClick={handleClickOpen}>
         取취약
       </Button>
-      <Dialog open={open} sx={{ color: 'black' }} onClose={handleClose}>
+      <Dialog open={open}  onClose={handleClose} PaperProps={{
+        style: {
+          backgroundColor: "transparent",
+          boxShadow: "none"
+        }
+        }} >
         <SignIn />
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

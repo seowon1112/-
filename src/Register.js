@@ -45,7 +45,12 @@ export default function Register() {
       <Link href="/"> 取취약  </Link>
          
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} PaperProps={{
+      style: {
+        backgroundColor: "transparent",
+        boxShadow: "none"
+      }
+      }}>
          
             <ThemeProvider theme={defaultTheme}>
               <Container component="main" maxWidth="xs">
@@ -56,6 +61,7 @@ export default function Register() {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
+                   
                   }}
                 >
                   <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -64,9 +70,10 @@ export default function Register() {
                   <Typography component="h1" variant="h5">
                     Register
                   </Typography>
-                  <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                  <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3,}}>
                     <Grid container spacing={2}>
-                      <Grid item xs={12} sm={6}>
+                      <Grid item xs={12} sm={6} >
+                        
                         <TextField
                           name="소속 부대"
                           required
@@ -74,6 +81,7 @@ export default function Register() {
                           id="소속 부대"
                           label="소속 부대"
                           autoFocus
+                         
                         />
                       </Grid>
                       <Grid item xs={12} sm={6}>
