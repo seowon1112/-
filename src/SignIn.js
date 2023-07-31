@@ -14,7 +14,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles'; //테마 관련.
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { useStyles } from './UseStyle';
-
+import LockIcon from '@mui/icons-material/Lock';
+import { Icon, IconButton } from '@mui/material';
+import { InputAdornment } from '@mui/material';
 
 
 const defaultTheme = createTheme();
@@ -100,33 +102,43 @@ export default function SignIn() {
                     }}
                 />
              
+          
+             
                 <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  className={classes.customTextField}
-                  InputLabelProps={{
-                    sx: {
-                      // set the color of the label when not shrinked
-                      color: "white",
-                      [`&.${inputLabelClasses.shrink}`]: {
-                        // set the color of the label when shrinked (usually when the TextField is focused)
-                        color: "white"
-                      }
-                    }
-                    }}
-                    
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    className={classes.customTextField}
                     sx={{
-                      ' .MuiOutlinedInput-root': {
-                      color: 'white',
-                      },
+                        '& label': {
+                            color: 'white', // 레이블 색상 설정
+                        },
+                        '& label.Mui-focused': {
+                            color: 'white', // 포커스된 상태에서 레이블 색상 설정
+                        },
+                        '& .MuiOutlinedInput-root': {
+                            color: 'white', // 입력 텍스트 색상 설정
+                        },
                     }}
+                    // InputProps={{
+                    //     startAdornment: (
+                    //         <InputAdornment position="start">
+                    //             <IconButton sx={{ color: 'primary.main' }}>
+                    //                 <LockIcon></LockIcon>
+                    //             </IconButton>
+                    //         </InputAdornment>
+                    //     ),
+                    // }}
                 />
+
+
+
+
 
                 <Button
                   type="submit"

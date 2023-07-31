@@ -17,10 +17,17 @@ import DialogActions from '@mui/material/DialogActions';
 const defaultTheme = createTheme();
 import { useStyles } from './UseStyle';
 import { inputLabelClasses } from "@mui/material/InputLabel";
+import { useHistory } from 'react-router-dom';
 
 
 
-export default function Register() {
+export default function Register({ setIsLoginOpen }) {
+  const history = useHistory();
+
+  const handleLoginClick = () => {
+    history.push('/?login=true');
+  };
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -71,7 +78,7 @@ export default function Register() {
                     <LockOutlinedIcon />
                   </Avatar>
                   <Typography component="h1" variant="h5" color="white">
-                    Register
+                   Registeration
                   </Typography>
                   <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3,}}>
                     <Grid container spacing={2}>
@@ -186,14 +193,49 @@ export default function Register() {
                       </Grid>
                     
                     </Grid>
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      sx={{ mt: 3, mb: 2 }}
-                    >
-                      Sign Up
-                    </Button>
+                    
+<Grid container spacing={2}>
+  <Grid item xs={6}>
+    <Button
+      fullWidth
+      variant="contained"
+      component={Link}
+      href="/" // 이 부분에 경로를 설정해주세요.
+      sx={{
+        mt: 3,
+        mb: 2,
+        bgcolor: 'secondary.main',
+        color: 'white',
+        '&:hover': {
+          bgcolor: 'secondary.dark',
+        },
+      }}
+    >
+      Login
+    </Button>
+  </Grid>
+  <Grid item xs={6}>
+    <Button
+      type="submit"
+      fullWidth
+      variant="contained"
+      sx={{
+        mt: 3,
+        mb: 2,
+        bgcolor: 'secondary.main',
+        color: 'white',
+        '&:hover': {
+          bgcolor: 'secondary.dark',
+        },
+      }}
+    >
+      Register
+    </Button>
+  </Grid>
+</Grid>
+
+
+
                    
                   </Box>
                 </Box>
