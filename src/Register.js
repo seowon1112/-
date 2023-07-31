@@ -21,13 +21,7 @@ import { useHistory } from 'react-router-dom';
 
 
 
-export default function Register({ setIsLoginOpen }) {
-  const history = useHistory();
-
-  const handleLoginClick = () => {
-    history.push('/?login=true');
-  };
-  
+export default function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
