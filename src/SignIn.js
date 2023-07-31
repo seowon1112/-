@@ -13,6 +13,9 @@ import Typography from '@mui/material/Typography'; // 모르면 바보 ㅋ
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles'; //테마 관련.
 import { inputLabelClasses } from "@mui/material/InputLabel";
+import { useStyles } from './UseStyle';
+
+
 
 const defaultTheme = createTheme();
 
@@ -34,6 +37,8 @@ export default function SignIn() {
   const handleClose = () => {
     setOpen(false);
   };
+  
+  const classes = useStyles();
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -73,7 +78,8 @@ export default function SignIn() {
                   label="User"
                   name="user"
                   autoFocus
-              
+                  className={classes.customTextField}
+                 
               
                   
                     InputLabelProps={{
@@ -103,6 +109,7 @@ export default function SignIn() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  className={classes.customTextField}
                   InputLabelProps={{
                     sx: {
                       // set the color of the label when not shrinked

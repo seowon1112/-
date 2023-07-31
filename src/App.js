@@ -17,7 +17,6 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
           <div className="App">
             <Routes>
                 <Route path = '/' element = {<Main/>}/>
-                {/* <Route path = '/signin' element = {<SignIn/>}/> */}
                 <Route path = '/register' element = {<Register/>}/>
             </Routes>
             </div>

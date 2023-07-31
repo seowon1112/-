@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'; //테마 관�
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 const defaultTheme = createTheme();
+import { useStyles } from './UseStyle';
+import { inputLabelClasses } from "@mui/material/InputLabel";
 
 
 
@@ -38,6 +40,7 @@ export default function Register() {
     setOpen(false);
    
   };
+  const classes = useStyles();
 
   return (
     <div>
@@ -67,7 +70,7 @@ export default function Register() {
                   <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                     <LockOutlinedIcon />
                   </Avatar>
-                  <Typography component="h1" variant="h5">
+                  <Typography component="h1" variant="h5" color="white">
                     Register
                   </Typography>
                   <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3,}}>
@@ -81,7 +84,23 @@ export default function Register() {
                           id="소속 부대"
                           label="소속 부대"
                           autoFocus
-                         
+                          className={classes.customTextField}
+                          InputLabelProps={{
+                            sx: {
+                              // set the color of the label when not shrinked
+                              color: "white",
+                              [`&.${inputLabelClasses.shrink}`]: {
+                                // set the color of the label when shrinked (usually when the TextField is focused)
+                                color: "white"
+                              }
+                            }
+                            }}
+                            
+                            sx={{
+                              ' .MuiOutlinedInput-root': {
+                              color: 'white',
+                              },
+                            }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={6}>
@@ -90,7 +109,25 @@ export default function Register() {
                           fullWidth
                           id="군번"
                           label="군번"
-                          name="군번"                        />
+                          name="군번"       
+                          className={classes.customTextField}
+                          InputLabelProps={{
+                            sx: {
+                              // set the color of the label when not shrinked
+                              color: "white",
+                              [`&.${inputLabelClasses.shrink}`]: {
+                                // set the color of the label when shrinked (usually when the TextField is focused)
+                                color: "white"
+                              }
+                            }
+                            }}
+                            
+                            sx={{
+                              ' .MuiOutlinedInput-root': {
+                              color: 'white',
+                              },
+                            }}
+                          />
                       </Grid>
                       <Grid item xs={12}>
                         <TextField
@@ -99,6 +136,23 @@ export default function Register() {
                           id="User ID"
                           label="User ID"
                           name="User ID"
+                          className={classes.customTextField}
+                          InputLabelProps={{
+                            sx: {
+                              // set the color of the label when not shrinked
+                              color: "white",
+                              [`&.${inputLabelClasses.shrink}`]: {
+                                // set the color of the label when shrinked (usually when the TextField is focused)
+                                color: "white"
+                              }
+                            }
+                            }}
+                            
+                            sx={{
+                              ' .MuiOutlinedInput-root': {
+                              color: 'white',
+                              },
+                            }}
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -110,6 +164,24 @@ export default function Register() {
                           type="password"
                           id="password"
                           autoComplete="new-password"
+                          className={classes.customTextField}
+                          InputLabelProps={{
+                            sx: {
+                              // set the color of the label when not shrinked
+                              color: "white",
+                              [`&.${inputLabelClasses.shrink}`]: {
+                                // set the color of the label when shrinked (usually when the TextField is focused)
+                                color: "white"
+                              }
+                            }
+                            }}
+                            
+                            sx={{
+                              ' .MuiOutlinedInput-root': {
+                              color: 'white',
+                              },
+                            }}
+
                         />
                       </Grid>
                     
