@@ -34,10 +34,7 @@ export default function Main() {
         }
         }} >
         <SignIn />
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
-        </DialogActions>
+     
       </Dialog>
     </div>
   );

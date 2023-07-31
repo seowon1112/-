@@ -61,7 +61,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5" color="white">
-            Sign in
+             Login
           </Typography>
           <Box
             component="form"
@@ -132,29 +132,53 @@ export default function SignIn() {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  sx={{
+                    mt: 3, 
+                    mb: 2,
+                    bgcolor: 'secondary.main', // 버튼의 배경색
+                    color: 'white', // 버튼의 폰트 색상
+                    '&:hover': {
+                      bgcolor: 'secondary.dark', // 버튼 호버 시 배경색
+                    },
+                  }}
                 >
                   Sign In
                 </Button>
-
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot password?
-                    </Link>
+                <Grid container alignItems="center" justifyContent="space-between">
+                  <Grid item>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          value="remember"
+                          style={{
+                            color: '#ffffff',
+                            '&$checked': {
+                              color: '#ffffff',
+                            },
+                          }}
+                        />
+                      }
+                      label={
+                        <Typography style={{ color: '#ffffff' }} variant="body2">
+                          Administration Login
+                        </Typography>
+                      }
+                    />
                   </Grid>
-            
 
                   <Grid item>
-                    <Link href="/register" variant="body2">
-                      "Register Admin"
-                    </Link>
+                    <Typography align="right" style={{ color: '#ffffff' }}>
+                      <Link href="/register" style={{ textDecoration: "none", color: "#ffffff" }}> {/* 여기서 링크의 스타일을 수정해 줍니다 */} 
+                        Registeration
+                      </Link>
+                    </Typography>
                   </Grid>
-                  
                 </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+
+                                              
+              </Box>
+            </Box>
+          </Container>
+        </ThemeProvider>
   );
 }
