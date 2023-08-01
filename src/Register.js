@@ -18,6 +18,7 @@ const defaultTheme = createTheme();
 import { useStyles } from './UseStyle';
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { useHistory } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
 
@@ -37,18 +38,26 @@ export default function Register() {
     setOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-   
-  };
+  
   const classes = useStyles();
 
+
+  const handleClose = () => {
+    setOpen(false);
+    window.location.replace("/");
+  };
   return (
     <div>
-      <Button variant="outlined" >
-      <Link href="/"> 取취약  </Link>
-         
-      </Button>
+       {/* "취약" 제목 추가 */}
+       <Typography variant="h4" component="h1" align="center" gutterBottom style={{ marginTop: 150 }} fontSize="89.4pt" color="white">
+          取취약
+        </Typography>
+        {/* "백신" 부제 추가 */}
+        <Typography variant="h5" component="h2" align="center" fontSize="35pt" color="white">
+          백신을 취하다.
+        </Typography>
+
+     
       <Dialog open={open} onClose={handleClose} PaperProps={{
       style: {
         backgroundColor: "transparent",
@@ -61,7 +70,7 @@ export default function Register() {
                 <CssBaseline />
                 <Box
                   sx={{
-                    marginTop: 8,
+                    marginTop: 30,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -188,45 +197,45 @@ export default function Register() {
                     
                     </Grid>
                     
-<Grid container spacing={2}>
-  <Grid item xs={6}>
-    <Button
-      fullWidth
-      variant="contained"
-      component={Link}
-      href="/" // 이 부분에 경로를 설정해주세요.
-      sx={{
-        mt: 3,
-        mb: 2,
-        bgcolor: 'secondary.main',
-        color: 'white',
-        '&:hover': {
-          bgcolor: 'secondary.dark',
-        },
-      }}
-    >
-      Login
-    </Button>
-  </Grid>
-  <Grid item xs={6}>
-    <Button
-      type="submit"
-      fullWidth
-      variant="contained"
-      sx={{
-        mt: 3,
-        mb: 2,
-        bgcolor: 'secondary.main',
-        color: 'white',
-        '&:hover': {
-          bgcolor: 'secondary.dark',
-        },
-      }}
-    >
-      Register
-    </Button>
-  </Grid>
-</Grid>
+                      <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                          <Button
+                            fullWidth
+                            variant="contained"
+                            component={Link}
+                            href="/" // 이 부분에 경로를 설정해주세요.
+                            sx={{
+                              mt: 3,
+                              mb: 2,
+                              bgcolor: 'secondary.main',
+                              color: 'white',
+                              '&:hover': {
+                                bgcolor: 'secondary.dark',
+                              },
+                            }}
+                          >
+                            Login
+                          </Button>
+                        </Grid>
+                        <Grid item xs={6}>
+                          <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{
+                              mt: 3,
+                              mb: 2,
+                              bgcolor: 'secondary.main',
+                              color: 'white',
+                              '&:hover': {
+                                bgcolor: 'secondary.dark',
+                              },
+                            }}
+                          >
+                            Register
+                          </Button>
+                        </Grid>
+                      </Grid>
 
 
 
@@ -235,10 +244,7 @@ export default function Register() {
                 </Box>
               </Container>
             </ThemeProvider>
-        <DialogActions>
-          <Link href="/"> Cancel </Link>
-          <Link href="/"> Register</Link>
-        </DialogActions>
+        
       </Dialog>
     </div>
   );
