@@ -20,9 +20,12 @@ import { inputLabelClasses } from "@mui/material/InputLabel";
 import { useHistory } from 'react-router-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import { useState }from 'react';
 
 
-export default function Register() {
+
+
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -46,6 +49,8 @@ export default function Register() {
     setOpen(false);
     window.location.replace("/");
   };
+  
+
   return (
     <div>
        {/* "취약" 제목 추가 */}
@@ -89,9 +94,10 @@ export default function Register() {
                       <TextField
                           required
                           fullWidth
-                          id="군번"
+                          id="serial"
                           label="군번"
-                          name="군번"       
+                          name="serial"    
+                          value={serial}   
                           className={classes.customTextField}
                           InputLabelProps={{
                             sx: {
@@ -109,6 +115,9 @@ export default function Register() {
                               color: 'white',
                               },
                             }}
+                            onChange={(event)=> {
+                              setSerial(event.target.value);
+                            }}
                           />
                       
                       </Grid>
@@ -120,6 +129,7 @@ export default function Register() {
                           fullWidth
                           id="name"
                           label="성명"
+                          value={name}
                           autoFocus
                           className={classes.customTextField}
                           InputLabelProps={{
@@ -138,6 +148,9 @@ export default function Register() {
                               color: 'white',
                               },
                             }}
+                            onChange={(event)=> {
+                              setName(event.target.value);
+                            }}
                            />
 
                       </Grid>
@@ -148,6 +161,7 @@ export default function Register() {
                           id="rank"
                           label="계급"
                           name="rank"       
+                          
                           className={classes.customTextField}
                           InputLabelProps={{
                             sx: {
@@ -204,6 +218,7 @@ export default function Register() {
                           id="User ID"
                           label="User ID"
                           name="User ID"
+                          value={userid}
                           className={classes.customTextField}
                           InputLabelProps={{
                             sx: {
@@ -221,6 +236,9 @@ export default function Register() {
                               color: 'white',
                               },
                             }}
+                            onChange={(event)=> {
+                              setUserId(event.target.value);
+                            }}
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -231,6 +249,7 @@ export default function Register() {
                           label="Password"
                           type="password"
                           id="password"
+                          value = {password}
                           autoComplete="new-password"
                           className={classes.customTextField}
                           InputLabelProps={{
@@ -249,7 +268,9 @@ export default function Register() {
                               color: 'white',
                               },
                             }}
-
+                            onChange={(event)=> {
+                              setPassword(event.target.value);
+                            }}
                         />
                       </Grid>
                       <Grid item xs={12}>
