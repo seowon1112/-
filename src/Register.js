@@ -119,7 +119,7 @@ export default function Register() {
                           required
                           fullWidth
                           id="name"
-                          label="이름"
+                          label="성명"
                           autoFocus
                           className={classes.customTextField}
                           InputLabelProps={{
