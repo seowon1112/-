@@ -19,22 +19,13 @@ import { useStyles } from './UseStyle';
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { useHistory } from 'react-router-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import axios from "axios";
 
 import { useState }from 'react';
 
 
-
-
-  
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-  
+export default function Register(){
+ 
   const [open, setOpen] = React.useState(true);
 
   const handleClickOpen = () => {
@@ -50,6 +41,28 @@ import { useState }from 'react';
     window.location.replace("/");
   };
   
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+
+    axios.post('/register', {
+      serial: data.get('serial'),
+      name: data.get('name'),
+      rank: data.get('rank'),
+      권한: data.get('권한'),
+      userId: data.get('User ID'),
+      password: data.get('password'),
+      "소속 부대": data.get('소속 부대')
+    }).then((response) => {
+      console.log(response);
+    }).catch((error) => {
+      console.log(error);
+    });
+  };
 
   return (
     <div>
@@ -79,7 +92,7 @@ import { useState }from 'react';
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                   
+                    
                   }}
                 >
                   <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -88,7 +101,7 @@ import { useState }from 'react';
                   <Typography component="h1" variant="h5" color="white">
                    Registeration
                   </Typography>
-                  <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3,}}>
+                  <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3, }}>
                     <Grid container spacing={2}>
                       <Grid item xs={12} sm={6} >
                       <TextField
@@ -97,7 +110,7 @@ import { useState }from 'react';
                           id="serial"
                           label="군번"
                           name="serial"    
-                          value={serial}   
+                          
                           className={classes.customTextField}
                           InputLabelProps={{
                             sx: {
@@ -115,9 +128,7 @@ import { useState }from 'react';
                               color: 'white',
                               },
                             }}
-                            onChange={(event)=> {
-                              setSerial(event.target.value);
-                            }}
+                           
                           />
                       
                       </Grid>
@@ -129,7 +140,6 @@ import { useState }from 'react';
                           fullWidth
                           id="name"
                           label="성명"
-                          value={name}
                           autoFocus
                           className={classes.customTextField}
                           InputLabelProps={{
@@ -218,7 +228,6 @@ import { useState }from 'react';
                           id="User ID"
                           label="User ID"
                           name="User ID"
-                          value={userid}
                           className={classes.customTextField}
                           InputLabelProps={{
                             sx: {
@@ -236,9 +245,7 @@ import { useState }from 'react';
                               color: 'white',
                               },
                             }}
-                            onChange={(event)=> {
-                              setUserId(event.target.value);
-                            }}
+                           
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -249,7 +256,6 @@ import { useState }from 'react';
                           label="Password"
                           type="password"
                           id="password"
-                          value = {password}
                           autoComplete="new-password"
                           className={classes.customTextField}
                           InputLabelProps={{
@@ -268,9 +274,7 @@ import { useState }from 'react';
                               color: 'white',
                               },
                             }}
-                            onChange={(event)=> {
-                              setPassword(event.target.value);
-                            }}
+                           
                         />
                       </Grid>
                       <Grid item xs={12}>
