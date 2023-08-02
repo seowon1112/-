@@ -20,11 +20,12 @@ import { inputLabelClasses } from "@mui/material/InputLabel";
 import { useHistory } from 'react-router-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import { NavLink } from "react-router-dom";
 import { useState }from 'react';
 
 
 
-export default function register(){
+export default function Register(){
   
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -47,7 +48,7 @@ export default function register(){
 
   const handleClose = () => {
     setOpen(false);
-    window.location.replace("/");
+   //window.location.replace("/"); 이거 돌아가는 거임. dialog 꺼지면.
   };
   
 
@@ -97,7 +98,7 @@ export default function register(){
                           id="serial"
                           label="군번"
                           name="serial"    
-                          value={serial}   
+                        //  value={serial}   
                           className={classes.customTextField}
                           InputLabelProps={{
                             sx: {
@@ -129,7 +130,7 @@ export default function register(){
                           fullWidth
                           id="name"
                           label="성명"
-                          value={name}
+                         // value={name}
                           autoFocus
                           className={classes.customTextField}
                           InputLabelProps={{
@@ -218,7 +219,7 @@ export default function register(){
                           id="User ID"
                           label="User ID"
                           name="User ID"
-                          value={userid}
+                         // value={userid}
                           className={classes.customTextField}
                           InputLabelProps={{
                             sx: {
@@ -249,7 +250,7 @@ export default function register(){
                           label="Password"
                           type="password"
                           id="password"
-                          value = {password}
+                          //value = {password}
                           autoComplete="new-password"
                           className={classes.customTextField}
                           InputLabelProps={{
@@ -301,26 +302,34 @@ export default function register(){
                       </Grid>
                     </Grid>
                     
-                      <Grid container spacing={2}>
-                        <Grid item xs={6}>
+                   <Grid container spacing={2}>
+                      <Grid item xs={6}>
+                        <NavLink
+                          to="/"
+                          style={{
+                            textDecoration: "none",
+                            display: "block",
+                            width: "100%"
+                          }}
+                        >
                           <Button
                             fullWidth
                             variant="contained"
-                            component={Link}
-                            href="/" // 이 부분에 경로를 설정해주세요.
                             sx={{
                               mt: 3,
                               mb: 2,
-                              bgcolor: 'secondary.main',
-                              color: 'white',
-                              '&:hover': {
-                                bgcolor: 'secondary.dark',
+                              bgcolor: "secondary.main",
+                              color: "white",
+                              "&:hover": {
+                                bgcolor: "secondary.dark",
                               },
                             }}
                           >
                             Login
                           </Button>
-                        </Grid>
+                        </NavLink>
+                      </Grid>
+                  
                         <Grid item xs={6}>
                           <Button
                             type="submit"

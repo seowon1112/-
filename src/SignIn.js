@@ -17,6 +17,7 @@ import { useStyles } from './UseStyle';
 import LockIcon from '@mui/icons-material/Lock';
 import { Icon, IconButton } from '@mui/material';
 import { InputAdornment } from '@mui/material';
+import { NavLink } from "react-router-dom";
 
 
 const defaultTheme = createTheme();
@@ -180,9 +181,9 @@ export default function SignIn() {
 
                   <Grid item>
                     <Typography align="right" style={{ color: '#ffffff' }}>
-                      <Link href="/register" style={{ textDecoration: "none", color: "#ffffff" }}> {/* 여기서 링크의 스타일을 수정해 줍니다 */} 
-                        Registeration
-                      </Link>
+                    <NavLink to="/register" style={{ textDecoration: "none", color: "#ffffff" }}>
+                      Registration
+                    </NavLink>
                     </Typography>
                   </Grid>
                 </Grid>

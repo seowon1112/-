@@ -7,20 +7,20 @@ import SignIn from './SignIn.js';
 import Main from './Main.js';
 import Register from './Register.js';
 
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
- function App() {
-  
+function App() {
+
   return (
-        
-        <BrowserRouter>
-          <div className="App">
-            <Routes>
-                <Route path = '/' element = {<Main/>}/>
-                <Route path = '/register' element = {<Register/>}/>
-            </Routes>
-            </div>
-        </BrowserRouter>
+
+    <BrowserRouter basename="/absproxy/3000">
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
 
   );
 }
