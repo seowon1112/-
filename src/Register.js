@@ -24,7 +24,7 @@ import { useState }from 'react';
 
 
 
-
+export default function register(){
   
   const handleSubmit = (event) => {
     event.preventDefault();
