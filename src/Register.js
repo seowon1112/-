@@ -62,17 +62,17 @@ export default function Register(){
     
     // FormData로 부터 값을 가져옵니다.
     const registerData = {
-      serial: data.get('serial'),
+      id: data.get('serial'),
       name: data.get('name'),
-      rank: data.get('rank'),
-      권한: data.get('권한'),
-      userId: data.get('User ID'),
       password: data.get('password'),
-      소속_부대: data.get('소속 부대'),
+      rank_code: data.get('rank'),
+      auth_level: data.get('권한'),
+      unit_code: data.get('소속 부대'),
     };
-  
+    
     // Axios를 사용하여 API 호출을 합니다.
     try {
+      console.log(registerData)
       // 서버 URL을 바꾸어야 할 수도 있습니다. 이 부분을 확인해주세요.
       const response = await axios.post('http://34.134.152.107:8000/api/users/register', registerData);
       console.log(response);
@@ -247,8 +247,8 @@ export default function Register(){
                               color: 'white',
                             },
                           }}>                         
-                          {ranks && ranks.map((rank) => (
-                            <MenuItem key={1} value={rank.rank_name}>
+                          {ranks?.map((rank) => (
+                            <MenuItem key={1} value={rank.rank_code}>
                               {rank.rank_name}
                             </MenuItem>
                           ))}
@@ -259,7 +259,7 @@ export default function Register(){
                       <Grid item xs={12} sm={6}>
                        
                             <TextField
-                          name="permission"
+                          name="권한"
                           required
                           fullWidth
                           id="permission"
@@ -286,7 +286,7 @@ export default function Register(){
                             }}
                             >
                             {permissions.map((permission) => (
-                              <MenuItem key={3} value={permission.level_name}>
+                              <MenuItem key={3} value={permission.level_code}>
                                 {permission.level_name}
                               </MenuItem>
                             ))}
@@ -383,7 +383,7 @@ export default function Register(){
                           <MenuItem value="부대2">부대2</MenuItem>
                           <MenuItem value="부대3">부대3</MenuItem>
                           {units &&units.map((unit) => (
-                            <MenuItem key={2} value={unit.unit_name}>
+                            <MenuItem key={2} value={unit.unit_code}>
                               {unit.unit_name}
                             </MenuItem>
                           ))}
