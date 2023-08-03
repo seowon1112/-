@@ -17,25 +17,81 @@ import DialogActions from '@mui/material/DialogActions';
 const defaultTheme = createTheme();
 import { useStyles } from './UseStyle';
 import { inputLabelClasses } from "@mui/material/InputLabel";
-import { useHistory } from 'react-router-dom';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import MenuItem from '@mui/material/MenuItem';
+
 
 import { NavLink } from "react-router-dom";
-import { useState }from 'react';
+import { useState, useEffect } from 'react';
+
+import axios from 'axios';
 
 
 
 export default function Register(){
+  const navigate = useNavigate();
+  const [ranks, setRanks] = useState([]);
+  const [units, setUnits] = useState([]);
+  const [permissions, setPermissions] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response_ranks = await axios.get('http://34.134.152.107:8000/api/ranks/getallranks');
+        const response_units = await axios.get('http://34.134.152.107:8000/api/units/getallunits');
+        const response_permissions = await axios.get('http://34.134.152.107:8000/api/levels/getalllevels');
+
+        if (response_ranks.data && response_units.data && response_permissions.data) {
+          setRanks(response_ranks.data);
+          setUnits(response_units.data);
+          setPermissions(response_permissions.data); // 올바른 변수명을 사용합니다.
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
   
-  const handleSubmit = (event) => {
+    fetchData();
+  }, []);
+  
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
+    
+    // FormData로 부터 값을 가져옵니다.
+    const registerData = {
+      serial: data.get('serial'),
+      name: data.get('name'),
+      rank: data.get('rank'),
+      권한: data.get('권한'),
+      userId: data.get('User ID'),
       password: data.get('password'),
-    });
+      소속_부대: data.get('소속 부대'),
+    };
+  
+    // Axios를 사용하여 API 호출을 합니다.
+    try {
+      // 서버 URL을 바꾸어야 할 수도 있습니다. 이 부분을 확인해주세요.
+      const response = await axios.post('http://34.134.152.107:8000/api/users/register', registerData);
+      console.log(response);
+  
+      if (response.status === 200) {
+        // 응답이 성공인 경우, 추가 작업을 수행하세요.
+        // 예: 페이지를 변경하거나 상태를 업데이트합니다.
+        navigate('/');
+
+        // or
+        // history.push('/');
+      } else {
+        // 응답이 성공이 아닌 경우, 오류 처리를 수행하세요.
+        console.error('Error during registration');
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+    }
   };
   
+
   const [open, setOpen] = React.useState(true);
 
   const handleClickOpen = () => {
@@ -116,9 +172,7 @@ export default function Register(){
                               color: 'white',
                               },
                             }}
-                            onChange={(event)=> {
-                              setSerial(event.target.value);
-                            }}
+                          
                           />
                       
                       </Grid>
@@ -149,49 +203,54 @@ export default function Register(){
                               color: 'white',
                               },
                             }}
-                            onChange={(event)=> {
-                              setName(event.target.value);
-                            }}
+                           
                            />
 
                       </Grid>
-                      <Grid item xs={12} sm={6} >
-                      <TextField
+                    
+                      <Grid item xs={12} sm={6}>
+                        <TextField
                           required
                           fullWidth
                           id="rank"
                           label="계급"
-                          name="rank"       
-                          
+                          name="rank"
+                          select
                           className={classes.customTextField}
                           InputLabelProps={{
                             sx: {
-                              // set the color of the label when not shrinked
+                          // set the color of the label when not shrinked
                               color: "white",
                               [`&.${inputLabelClasses.shrink}`]: {
-                                // set the color of the label when shrinked (usually when the TextField is focused)
+                              // set the color of the label when shrinked (usually when the TextField is focused)
                                 color: "white"
-                              }
-                            }
-                            }}
-                            
-                            sx={{
-                              ' .MuiOutlinedInput-root': {
-                              color: 'white',
                               },
-                            }}
-                          />
-                      
+                            },
+                          }}
+                          sx={{
+                            ' .MuiOutlinedInput-root': {
+                              color: 'white',
+                            },
+                          }}>                         
+                          {ranks.map((rank) => (
+                            <MenuItem key={rank.id} value={rank.id}>
+                              {rank.name}
+                            </MenuItem>
+                          ))}
+                        </TextField>
                       </Grid>
+
+
                       <Grid item xs={12} sm={6}>
                        
                             <TextField
-                          name="권한"
+                          name="permission"
                           required
                           fullWidth
-                          id="권한"
+                          id="permission"
                           label="권한"
                           autoFocus
+                          select
                           className={classes.customTextField}
                           InputLabelProps={{
                             sx: {
@@ -209,7 +268,14 @@ export default function Register(){
                               color: 'white',
                               },
                             }}
-                           />
+                            >
+                            {permissions.map((permission) => (
+                              <MenuItem key={permission.id} value={permission.id}>
+                                {permission.name}
+                              </MenuItem>
+                            ))}
+                            </TextField>
+                           
 
                       </Grid>
                       <Grid item xs={12}>
@@ -237,9 +303,7 @@ export default function Register(){
                               color: 'white',
                               },
                             }}
-                            onChange={(event)=> {
-                              setUserId(event.target.value);
-                            }}
+                          
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -269,9 +333,7 @@ export default function Register(){
                               color: 'white',
                               },
                             }}
-                            onChange={(event)=> {
-                              setPassword(event.target.value);
-                            }}
+                         
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -281,6 +343,7 @@ export default function Register(){
                           id="소속 부대"
                           label="소속 부대"
                           name="소속 부대"
+                          select
                           className={classes.customTextField}
                           InputLabelProps={{
                             sx: {
@@ -289,17 +352,27 @@ export default function Register(){
                               [`&.${inputLabelClasses.shrink}`]: {
                                 // set the color of the label when shrinked (usually when the TextField is focused)
                                 color: "white"
-                              }
-                            }
-                            }}
-                            
-                            sx={{
-                              ' .MuiOutlinedInput-root': {
-                              color: 'white',
                               },
-                            }}
-                        />
+                            },
+                          }}
+                          sx={{
+                            ' .MuiOutlinedInput-root': {
+                              color: 'white',
+                            },
+                          }}
+                        >
+                          <MenuItem value="부대1">부대1</MenuItem>
+                          <MenuItem value="부대2">부대2</MenuItem>
+                          <MenuItem value="부대3">부대3</MenuItem>
+                          {units.map((unit) => (
+                            <MenuItem key={unit.id} value={unit.id}>
+                              {unit.name}
+                            </MenuItem>
+                          ))}
+                          {/* 나머지 부대 항목 추가 */}
+                        </TextField>
                       </Grid>
+
                     </Grid>
                     
                    <Grid container spacing={2}>
