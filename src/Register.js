@@ -33,7 +33,9 @@ export default function Register(){
   const [ranks, setRanks] = useState([]);
   const [units, setUnits] = useState([]);
   const [permissions, setPermissions] = useState([]);
-
+  const [selectedPermission, setSelectedPermission] = useState('');
+  const [selectedRanks, setSelectedRanks] = useState('');
+  const [selectedUnits, setSelectedUnits] = useState('');
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,9 +44,9 @@ export default function Register(){
         const response_permissions = await axios.get('http://34.134.152.107:8000/api/levels/getalllevels');
 
         if (response_ranks.data && response_units.data && response_permissions.data) {
-          setRanks(response_ranks.data);
-          setUnits(response_units.data);
-          setPermissions(response_permissions.data); // 올바른 변수명을 사용합니다.
+          setRanks(response_ranks.data.result);
+          setUnits(response_units.data.result);
+          setPermissions(response_permissions.data.result); // 올바른 변수명을 사용합니다.
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -94,10 +96,21 @@ export default function Register(){
 
   const [open, setOpen] = React.useState(true);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
+  function handleChange3(event) {
+    setSelectedPermission(event.target.value);
+   
+  }
+  
+  function handleChange2(event) {
+  
+    setSelectedUnits(event.target.value);
+   
+  }
+  function handleChange(event) {
+  
+    setSelectedRanks(event.target.value);
+   
+  }
   
   const classes = useStyles();
 
@@ -215,6 +228,8 @@ export default function Register(){
                           id="rank"
                           label="계급"
                           name="rank"
+                          value={selectedRanks} // Add this
+                          onChange={handleChange} // Add this
                           select
                           className={classes.customTextField}
                           InputLabelProps={{
@@ -232,9 +247,9 @@ export default function Register(){
                               color: 'white',
                             },
                           }}>                         
-                          {ranks.map((rank) => (
-                            <MenuItem key={rank.id} value={rank.id}>
-                              {rank.name}
+                          {ranks && ranks.map((rank) => (
+                            <MenuItem key={1} value={rank.rank_name}>
+                              {rank.rank_name}
                             </MenuItem>
                           ))}
                         </TextField>
@@ -249,9 +264,10 @@ export default function Register(){
                           fullWidth
                           id="permission"
                           label="권한"
-                          autoFocus
                           select
                           className={classes.customTextField}
+                          value={selectedPermission} // Add this
+                          onChange={handleChange3} // Add this
                           InputLabelProps={{
                             sx: {
                               // set the color of the label when not shrinked
@@ -270,8 +286,8 @@ export default function Register(){
                             }}
                             >
                             {permissions.map((permission) => (
-                              <MenuItem key={permission.id} value={permission.id}>
-                                {permission.name}
+                              <MenuItem key={3} value={permission.level_name}>
+                                {permission.level_name}
                               </MenuItem>
                             ))}
                             </TextField>
@@ -344,6 +360,8 @@ export default function Register(){
                           label="소속 부대"
                           name="소속 부대"
                           select
+                          value={selectedUnits} // Add this
+                          onChange={handleChange2} // Add this
                           className={classes.customTextField}
                           InputLabelProps={{
                             sx: {
@@ -364,9 +382,9 @@ export default function Register(){
                           <MenuItem value="부대1">부대1</MenuItem>
                           <MenuItem value="부대2">부대2</MenuItem>
                           <MenuItem value="부대3">부대3</MenuItem>
-                          {units.map((unit) => (
-                            <MenuItem key={unit.id} value={unit.id}>
-                              {unit.name}
+                          {units &&units.map((unit) => (
+                            <MenuItem key={2} value={unit.unit_name}>
+                              {unit.unit_name}
                             </MenuItem>
                           ))}
                           {/* 나머지 부대 항목 추가 */}
